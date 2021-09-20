@@ -35,12 +35,13 @@ public:
     void TestPeriodic() override;
 
 private:
-
-    // catapult
+    // Catapult
     TalonSRX cat_winch{0};
     frc::Solenoid cat_solenoid{0};
     frc::DigitalInput cat_limit_switch{0};
     CATAPULT_STATE cat_state = CATAPULT_STATE::WINDING;
+
+    const double FIRING_DELAY = 3.0;
     ElapsedTimer firing_timer;
 
     frc::Compressor compressor{0};
