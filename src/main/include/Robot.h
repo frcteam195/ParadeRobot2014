@@ -4,22 +4,45 @@
 
 #pragma once
 
-#include <frc/TimedRobot.h>
+#include <frc/WPILib.h>
+#include <ctre/Phoenix.h>
+#include <ElapsedTimer.hpp>
 
 class Robot : public frc::TimedRobot {
- public:
-  void RobotInit() override;
-  void RobotPeriodic() override;
+public:
 
-  void AutonomousInit() override;
-  void AutonomousPeriodic() override;
+    enum class CATAPULT_STATE{
+	PRIMED,
+	FIRING,
+	WINDING,
+	LATCHING,
+	UNWINDING
+    };
 
-  void TeleopInit() override;
-  void TeleopPeriodic() override;
+    void RobotInit() override;
+    void RobotPeriodic() override;
 
-  void DisabledInit() override;
-  void DisabledPeriodic() override;
+    void AutonomousInit() override;
+    void AutonomousPeriodic() override;
 
-  void TestInit() override;
-  void TestPeriodic() override;
+    void TeleopInit() override;
+    void TeleopPeriodic() override;
+
+    void DisabledInit() override;
+    void DisabledPeriodic() override;
+
+    void TestInit() override;
+    void TestPeriodic() override;
+
+private:
+
+    // catapult
+    TalonSRX cat_winch{0};
+    frc::Solenoid cat_solenoid{0};
+    frc::DigitalInput cat_limit_switch{0};
+    CATAPULT_STATE cat_state = CATAPULT_STATE::WINDING;
+    ElapsedTimer firing_timer;
+
+    frc::Compressor compressor{0};
+    frc::Joystick joystick{0};
 };
