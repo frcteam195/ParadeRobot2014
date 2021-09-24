@@ -8,15 +8,16 @@
 #include <ctre/Phoenix.h>
 #include <ElapsedTimer.hpp>
 
-class Robot : public frc::TimedRobot {
+class Robot : public frc::TimedRobot
+{
 public:
-
-    enum class CATAPULT_STATE{
-	PRIMED,
-	FIRING,
-	WINDING,
-	LATCHING,
-	UNWINDING
+    enum class CATAPULT_STATE
+    {
+        PRIMED,
+        FIRING,
+        WINDING,
+        LATCHING,
+        UNWINDING
     };
 
     void RobotInit() override;
