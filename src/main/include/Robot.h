@@ -13,11 +13,10 @@ class Robot : public frc::TimedRobot
 public:
     enum class CATAPULT_STATE
     {
-        PRIMED,
-        FIRING,
-        WINDING,
-        LATCHING,
-        UNWINDING
+        PRIMED = 0,
+        FIRING = 1,
+        WINDING = 2,
+        UNWINDING = 3
     };
 
     void RobotInit() override;
@@ -36,6 +35,9 @@ public:
     void TestPeriodic() override;
 
 private:
+    // Intake
+    TalonSRX intake{1};
+
     // Catapult
     TalonSRX cat_winch{5};
     TalonSRX cat_winch_inv{6};
@@ -43,7 +45,11 @@ private:
     frc::DigitalInput cat_limit_switch{0};
     CATAPULT_STATE cat_state = CATAPULT_STATE::WINDING;
 
-    const double FIRING_DELAY = 3.0;
+    const int TALON_ENCODER_MULTIPLER = 4;
+    const int ENCODER_TICKS = 128;
+    const int APPROXIMATE_WINCH_ROTATION = TALON_ENCODER_MULTIPLER * ENCODER_TICKS;
+
+    const double FIRING_DELAY = 1.5;
     ElapsedTimer firing_timer;
 
     frc::Compressor compressor{0};
