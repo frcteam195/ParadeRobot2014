@@ -31,6 +31,8 @@ void Robot::RobotInit() {
 
     cat_winch.Set(ControlMode::PercentOutput, 0);
 
+    cat_winch_inv.Follow( cat_winch, FollowerType::FollowerType_PercentOutput  );
+    cat_winch_inv.SetInverted(InvertType::OpposeMaster);
 }
 
 void Robot::RobotPeriodic() {
