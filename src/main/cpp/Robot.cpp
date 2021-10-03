@@ -54,10 +54,10 @@ void Robot::TeleopPeriodic()
 
     case CATAPULT_STATE::UNWINDING:
         cat_solenoid.Set(false);
-        cat_winch.Set(ControlMode::PercentOutput, -1.0);
+        cat_winch.Set(ControlMode::PercentOutput, -0.7);
         intake.Set(ControlMode::PercentOutput, 0.0);
 
-        if (cat_winch.GetSelectedSensorPosition() < -4 * APPROXIMATE_WINCH_ROTATION)
+        if (cat_winch.GetSelectedSensorPosition() < -2.1 * APPROXIMATE_WINCH_ROTATION)
         {
             cat_state = CATAPULT_STATE::PRIMED;
             std::cout << "Catapult Transitioning to PRIMED" << std::endl;
